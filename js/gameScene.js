@@ -20,7 +20,7 @@ class GameScene extends Phaser.Scene {
     var alien = this.add.sprite(400, 100,'alien');
     alien.setOrigin(0, 0);	   
 
-    this.ship = this.add.sprite(400, 600,'ship');
+    this.ship = this.add.sprite(1920/2, 1080-100,'ship');
     //ship.setOrigin(0, 0);	
 
     // create a group for the missiles
@@ -36,16 +36,20 @@ class GameScene extends Phaser.Scene {
     //console.log(time)
     var keySpaceObj = this.input.keyboard.addKey('SPACE');  // Get key object
     var keyLeftObj = this.input.keyboard.addKey('LEFT');  // Get key object
+    var keyRightObj = this.input.keyboard.addKey('RIGHT');  // Get key object
     var isDown = keySpaceObj.isDown;
     var isUp = keySpaceObj.isUp;
 
     if (keyLeftObj.isDown == true) {
-      this.ship.x--;
+      this.ship.x-=5;
+    }
+    if (keyRightObj.isDown == true) {
+      this.ship.x+=5;
     }
 
     if (isDown == true) {
       //this.addRocket();
-      this.missileGroup.create(this.ship.x, 500, 'missile');
+      this.missileGroup.create(this.ship.x, this.ship.y, 'missile');
     }
     var counter = 0;
     this.missileGroup.children.each(function(item) {
