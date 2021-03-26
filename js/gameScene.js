@@ -16,7 +16,7 @@ class GameScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#000000')
   }
 
-  preload() {
+  preload () {
     this.load.image('alien', 'assets/alien.png')
     this.load.image('ship', 'assets/spaceShip.png')
     this.load.image('missile', 'assets/missile.png')
@@ -34,7 +34,7 @@ class GameScene extends Phaser.Scene {
     this.missileGroup = this.add.group()
   }
 
-  update(time, delta) {
+  update (time, delta) {
     this.input.on('pointerup', function (pointer) {
       console.log('pointerup')
       this.addRocket()
@@ -44,7 +44,7 @@ class GameScene extends Phaser.Scene {
     const keyLeftObj = this.input.keyboard.addKey('LEFT') // Get key object
     const keyRightObj = this.input.keyboard.addKey('RIGHT') // Get key object
     const isDown = keySpaceObj.isDown
-    //const isUp = keySpaceObj.isUp
+    // const isUp = keySpaceObj.isUp
 
     if (keyLeftObj.isDown === true) {
       this.ship.x -= 5
@@ -63,14 +63,14 @@ class GameScene extends Phaser.Scene {
       if (item.y < 50) {
         item.destroy()
       }
-    }.bind(this))
+    })
   }
 
   addRocket () {
     this.missileGroup.create(100, 500, 'missile')
   }
 
-	end() {
+  end () {
 
   }
 }
