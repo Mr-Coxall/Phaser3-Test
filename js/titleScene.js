@@ -7,39 +7,37 @@
 // This is the Title Scene
 
 class TitleScene extends Phaser.Scene {
-
-  constructor() {
-    super({key:'titleScene'})
-  }
-  
-  init(data) {
-
+  constructor () {
+    super({ key: 'titleScene'})
   }
 
-	preload() {
+  init (data) {
+
+  }
+
+	preload () {
     this.load.image('background', 'assets/background.jpg')
   }
 
-	create(data) {
+	create (data) {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
-    var bg = this.add.sprite(0,0,'background')
-    bg.setOrigin(0,0)
+    const bg = this.add.sprite(0, 0, 'background')
+    bg.setOrigin(0, 0)
 
-    var text = this.add.text(100, 400, 'Welcome to my game!')
+    const text = this.add.text(100, 400, 'Welcome to my game!')
     text.setInteractive({ useHandCursor: true })
     text.on('pointerdown', () => this.clickButton())
 	}
-
-  update(time, delta) {
+  
+  update (time, delta) {
 
 	}
 
-  clickButton() {
+  clickButton () {
     this.scene.switch('gameScene')
   }
-
 }
 
-export default TitleScene;
+export default TitleScene
