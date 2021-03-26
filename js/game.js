@@ -1,5 +1,11 @@
 /* global Phaser */
 
+// Copyright (c) 2020 Mr. Coxall All rights reserved
+//
+// Created by: Mr. Coxall
+// Created on: Sep 2020
+// This is the Phaser3 configuration file
+
 import TitleScene from './titleScene.js'
 import GameScene from './gameScene.js'
 

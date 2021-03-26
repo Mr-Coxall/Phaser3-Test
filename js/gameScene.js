@@ -1,3 +1,11 @@
+/* global Phaser */
+
+// Copyright (c) 2020 Mr. Coxall All rights reserved
+//
+// Created by: Mr. Coxall
+// Created on: Sep 2020
+// This is the Game Scene
+
 class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
@@ -63,9 +71,8 @@ class GameScene extends Phaser.Scene {
   }
 
 	end() {
-  
-  }
 
+  }
 }
 
 export default GameScene
