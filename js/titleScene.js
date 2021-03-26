@@ -14,11 +14,11 @@ class TitleScene extends Phaser.Scene {
   init (data) {
 
   }
-  
+
   preload () {
     this.load.image('background', 'assets/background.jpg')
   }
-  
+
   create (data) {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
@@ -30,9 +30,9 @@ class TitleScene extends Phaser.Scene {
     text.setInteractive({ useHandCursor: true })
     text.on('pointerdown', () => this.clickButton())
   }
-  
+
   update (time, delta) {
-    
+
   }
 
   clickButton () {
