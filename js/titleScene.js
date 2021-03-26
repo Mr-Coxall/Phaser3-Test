@@ -8,18 +8,18 @@
 
 class TitleScene extends Phaser.Scene {
   constructor () {
-    super({ key: 'titleScene'})
+    super({ key: 'titleScene' })
   }
 
   init (data) {
 
   }
-
-	preload () {
+  
+  preload () {
     this.load.image('background', 'assets/background.jpg')
   }
-
-	create (data) {
+  
+  create (data) {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
@@ -29,11 +29,11 @@ class TitleScene extends Phaser.Scene {
     const text = this.add.text(100, 400, 'Welcome to my game!')
     text.setInteractive({ useHandCursor: true })
     text.on('pointerdown', () => this.clickButton())
-	}
+  }
   
   update (time, delta) {
-
-	}
+    
+  }
 
   clickButton () {
     this.scene.switch('gameScene')
