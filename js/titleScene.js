@@ -12,18 +12,19 @@ class TitleScene extends Phaser.Scene {
   }
 
   init (data) {
-
+    this.cameras.main.setBackgroundColor('#000000')
   }
 
   preload () {
-    this.load.image('background', 'assets/background.jpg')
+    console.log("Title Scene")
+    this.load.image('titleSceneBackground', 'assets/background.jpg')
   }
 
   create (data) {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
-    const bg = this.add.sprite(0, 0, 'background')
+    const bg = this.add.sprite(0, 0, 'titleSceneBackground')
     bg.setOrigin(0, 0)
 
     const text = this.add.text(100, 400, 'Welcome to my game!')
