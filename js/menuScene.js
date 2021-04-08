@@ -13,12 +13,11 @@ class MenuScene extends Phaser.Scene {
   }
 
   init (data) {
-    this.cameras.main.setBackgroundColor('#030303')
+    this.cameras.main.setBackgroundColor('#808080')
   }
 
   preload () {
-    console.log("Menu Scene")
-    this.load.image('menuSceneBackground', 'assets/background.jpg')
+    console.log('Menu Scene')
     this.load.image('startButton', 'assets/start.png')
   }
 
@@ -26,8 +25,6 @@ class MenuScene extends Phaser.Scene {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
-    const bg = this.add.sprite(0, 0, 'menuSceneBackground')
-    bg.setOrigin(0, 0)
 
     this.startButton = this.add.sprite(1920 / 2, 1080 / 2, 'startButton')
     this.startButton.setInteractive({ useHandCursor: true })

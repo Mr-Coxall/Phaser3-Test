@@ -7,7 +7,6 @@
 // This is the Game Scene
 
 class GameScene extends Phaser.Scene {
-
   // create an alien
   createAlien () {
     const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920;
@@ -24,20 +23,26 @@ class GameScene extends Phaser.Scene {
     // this.sound.play('explosion');
     missileCollide.destroy()
     alienCollide.destroy()
-    this.createAlien()
+    //this.createAlien()
+    this.score = this.score + 1
+    console.log(this.score)
   }
 
   constructor () {
     super({ key: 'gameScene' })
+
     this.ship = null
-    // this.aliens = null
-    // this.missiles = null
     this.fireMissile = false
-    // this.alienGroup = null
+    this.score = 5
+    console.log('constructor')
+    console.log(this.score)    
+    this.scoreText = 'Score: '
+    this.scoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" };
   }
 
   init () {
     this.cameras.main.setBackgroundColor('#000000')
+
   }
 
   preload () {
@@ -55,6 +60,8 @@ class GameScene extends Phaser.Scene {
     this.background = this.add.image(0, 0, 'starBackground').setScale(2.0)
     this.background.setOrigin(0, 0)
     this.ship = this.add.sprite(1920 / 2, 1080 - 100, 'ship')
+
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, this.scoreTextStyle)
 
     // create a group for the missiles
     this.missileGroup = this.physics.add.group()
@@ -118,6 +125,8 @@ class GameScene extends Phaser.Scene {
         aSingleAlien.body.velocity.x = alienXVelocity
       }
     })
+
+    this.scoreText.setText('Score: ' + this.score)
   }
 
   end () {
