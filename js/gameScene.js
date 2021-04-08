@@ -10,9 +10,9 @@ class GameScene extends Phaser.Scene {
 
   // create an alien
   createAlien () {
-    const alienXLocation = Math.floor(Math.random()*1920) + 1; // this will get a number between 1 and 1920;
-    var alienXVelocity = Math.floor(Math.random()*50) + 1; // this will get a number between 1 and 50;
-    alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
+    const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920;
+    let alienXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50;
+    alienXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
     const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien')
     anAlien.body.velocity.y = 200
     anAlien.body.velocity.x = alienXVelocity
@@ -20,8 +20,8 @@ class GameScene extends Phaser.Scene {
   }
 
   hitAlien (missileCollide, alienCollide) {
-    console.log("Hit")
-    //this.sound.play('explosion');
+    console.log('Hit')
+    // this.sound.play('explosion');
     missileCollide.destroy()
     alienCollide.destroy()
     this.createAlien()
@@ -30,10 +30,10 @@ class GameScene extends Phaser.Scene {
   constructor () {
     super({ key: 'gameScene' })
     this.ship = null
-    //this.aliens = null
-    //this.missiles = null
+    // this.aliens = null
+    // this.missiles = null
     this.fireMissile = false
-    //this.alienGroup = null
+    // this.alienGroup = null
   }
 
   init () {
@@ -47,8 +47,8 @@ class GameScene extends Phaser.Scene {
     this.load.image('ship', 'assets/spaceShip.png')
     this.load.image('missile', 'assets/missile.png')
     // sound
-    this.load.audio('laser', 'assets/laser1.wav');
-    this.load.audio('explosion', 'assets/barrelExploding.wav');
+    this.load.audio('laser', 'assets/laser1.wav')
+    this.load.audio('explosion', 'assets/barrelExploding.wav')
   }
 
   create () {
@@ -64,12 +64,12 @@ class GameScene extends Phaser.Scene {
     this.createAlien()
 
     // Collisions between missiles and aliens
-    //this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
+    // this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
     //  console.log("Yes")
     //  missileCollide.destroy();
     //  alienCollide.destroy;
-    //});
-    this.physics.add.overlap(this.missileGroup, this.alienGroup, this.hitAlien, null, self);
+    // });
+    this.physics.add.overlap(this.missileGroup, this.alienGroup, this.hitAlien, null, self)
   }
 
   update (time, delta) {
@@ -92,7 +92,7 @@ class GameScene extends Phaser.Scene {
         const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile')
         aNewMissile.body.velocity.y = -200
         this.missileGroup.add(aNewMissile)
-        this.sound.play('laser');
+        this.sound.play('laser')
       }
     }
     if (keySpaceObj.isUp === true) {
@@ -109,12 +109,12 @@ class GameScene extends Phaser.Scene {
     this.alienGroup.children.each(function (aSingleAlien) {
       // if the alien falls off the bottom of the screen, move it back to the top
       if (aSingleAlien.y > (1080 + 100)) {
-        const alienXLocation = Math.floor(Math.random() * 1920) + 1; // this will get a number between 1 and 1920;
-        var alienXVelocity = Math.floor(Math.random() * 50) + 1; // this will get a number between 1 and 50;
-        alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
+        const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920;
+        let alienXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50;
+        alienXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add minus sign in 50% of cases
         aSingleAlien.x = alienXLocation
         aSingleAlien.y = -100
-        //aSingleAlien.body.velocity.y = 200
+        // aSingleAlien.body.velocity.y = 200
         aSingleAlien.body.velocity.x = alienXVelocity
       }
     })
