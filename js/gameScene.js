@@ -70,8 +70,8 @@ class GameScene extends Phaser.Scene {
       this.createAlien()
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-     }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
- 
+    }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
+
     // Collisions between ship and aliens
     this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
       this.sound.play('bomb')
@@ -81,9 +81,7 @@ class GameScene extends Phaser.Scene {
       this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to start over.', this.gameOverTextStyle).setOrigin(0.5)
       this.gameOverText.setInteractive({ useHandCursor: true })
       this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
-
-     }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
-
+    }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
   }
 
   update (time, delta) {
