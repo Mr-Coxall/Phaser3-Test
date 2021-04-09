@@ -9,6 +9,8 @@
 class SplashScene extends Phaser.Scene {
   constructor () {
     super({ key: 'splashScene' })
+
+    const backgroundImage = null
   }
 
   init (data) {
@@ -24,7 +26,7 @@ class SplashScene extends Phaser.Scene {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
-    const this.backgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    this.backgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
     this.backgroundImage.x = 1920 / 2
     this.backgroundImage.y = 1080 / 2
   }

@@ -7,8 +7,6 @@
 // This is the Game Scene
 
 class GameScene extends Phaser.Scene {
-  score = 5
-
   // create an alien
   createAlien () {
     const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920;
@@ -20,25 +18,16 @@ class GameScene extends Phaser.Scene {
     this.alienGroup.add(anAlien)
   }
 
-  hitAlien (missileCollide, alienCollide) {
-    console.log('Hit')
-    // this.sound.play('explosion');
-    missileCollide.destroy()
-    alienCollide.destroy()
-    // this.createAlien()
-    this.score = this.score + 1
-    console.log(this.score)
-  }
-
   constructor () {
     super({ key: 'gameScene' })
+
     this.ship = null
     this.fireMissile = false
-    // this.score = 5
-    console.log('constructor')
-    console.log(this.score)
-    this.scoreText = 'Score: '
+    this.score = 0
+    this.scoreText = null
+    this.gameOverText
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
 
   init () {
@@ -54,14 +43,16 @@ class GameScene extends Phaser.Scene {
     // sound
     this.load.audio('laser', 'assets/laser1.wav')
     this.load.audio('explosion', 'assets/barrelExploding.wav')
+    this.load.audio('bomb', 'assets/bomb.wav')
   }
 
   create () {
     this.background = this.add.image(0, 0, 'starBackground').setScale(2.0)
     this.background.setOrigin(0, 0)
-    this.ship = this.add.sprite(1920 / 2, 1080 - 100, 'ship')
 
-    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score, this.scoreTextStyle)
+    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship')
+
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
 
     // create a group for the missiles
     this.missileGroup = this.physics.add.group()
@@ -71,17 +62,29 @@ class GameScene extends Phaser.Scene {
     this.createAlien()
 
     // Collisions between missiles and aliens
-    console.log('add 1')
     this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
-      console.log('Hit')
-      // this.sound.play('explosion');
+      this.sound.play('explosion');
       missileCollide.destroy()
       alienCollide.destroy()
-      // this.createAlien()
+      this.createAlien()
+      this.createAlien()
       this.score = this.score + 1
-      console.log(this.score)
-     });
-    //this.physics.add.overlap(this.missileGroup, this.alienGroup, this.hitAlien, null, self)
+      this.scoreText.setText('Score: ' + this.score.toString())
+
+     }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
+ 
+    // Collisions between ship and aliens
+    this.physics.add.collider(this.ship, this.alienGroup, function(shipCollide, alienCollide) {
+      this.sound.play('bomb');
+      this.physics.pause()
+      alienCollide.destroy()
+      shipCollide.destroy()
+      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to start over.', this.gameOverTextStyle).setOrigin(0.5)
+      this.gameOverText.setInteractive({ useHandCursor: true })
+      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+
+     }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
+
   }
 
   update (time, delta) {
