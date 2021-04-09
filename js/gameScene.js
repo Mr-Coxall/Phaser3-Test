@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
     // this.sound.play('explosion');
     missileCollide.destroy()
     alienCollide.destroy()
-    //this.createAlien()
+    // this.createAlien()
     this.score = this.score + 1
     console.log(this.score)
   }
@@ -35,14 +35,13 @@ class GameScene extends Phaser.Scene {
     this.fireMissile = false
     this.score = 5
     console.log('constructor')
-    console.log(this.score)    
+    console.log(this.score)
     this.scoreText = 'Score: '
-    this.scoreTextStyle = { font: "65px Arial", fill: "#ffffff", align: "center" };
+    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' };
   }
 
   init () {
     this.cameras.main.setBackgroundColor('#000000')
-
   }
 
   preload () {
