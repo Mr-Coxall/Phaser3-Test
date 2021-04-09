@@ -25,7 +25,7 @@ class GameScene extends Phaser.Scene {
     this.fireMissile = false
     this.score = 0
     this.scoreText = null
-    this.gameOverText
+    this.gameOverText = null
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
     this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
@@ -62,20 +62,19 @@ class GameScene extends Phaser.Scene {
     this.createAlien()
 
     // Collisions between missiles and aliens
-    this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
-      this.sound.play('explosion');
+    this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
+      this.sound.play('explosion')
       missileCollide.destroy()
       alienCollide.destroy()
       this.createAlien()
       this.createAlien()
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-
      }.bind(this)) // https://www.freecodecamp.org/news/learn-es6-the-dope-way-part-ii-arrow-functions-and-the-this-keyword-381ac7a32881/
  
     // Collisions between ship and aliens
-    this.physics.add.collider(this.ship, this.alienGroup, function(shipCollide, alienCollide) {
-      this.sound.play('bomb');
+    this.physics.add.collider(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
+      this.sound.play('bomb')
       this.physics.pause()
       alienCollide.destroy()
       shipCollide.destroy()
