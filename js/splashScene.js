@@ -12,7 +12,6 @@ class SplashScene extends Phaser.Scene {
   }
 
   init (data) {
-    const backgroundImage = null
     this.cameras.main.setBackgroundColor('#ffffff')
   }
 
@@ -25,7 +24,7 @@ class SplashScene extends Phaser.Scene {
     if (this.sound.context.state === 'suspended') {
       this.sound.context.resume()
     }
-    this.backgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    const this.backgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
     this.backgroundImage.x = 1920 / 2
     this.backgroundImage.y = 1080 / 2
   }

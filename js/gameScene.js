@@ -7,6 +7,8 @@
 // This is the Game Scene
 
 class GameScene extends Phaser.Scene {
+  score = 5
+
   // create an alien
   createAlien () {
     const alienXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920;
@@ -30,14 +32,13 @@ class GameScene extends Phaser.Scene {
 
   constructor () {
     super({ key: 'gameScene' })
-
     this.ship = null
     this.fireMissile = false
-    this.score = 5
+    // this.score = 5
     console.log('constructor')
     console.log(this.score)
     this.scoreText = 'Score: '
-    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' };
+    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
   }
 
   init () {
@@ -70,12 +71,17 @@ class GameScene extends Phaser.Scene {
     this.createAlien()
 
     // Collisions between missiles and aliens
-    // this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
-    //  console.log("Yes")
-    //  missileCollide.destroy();
-    //  alienCollide.destroy;
-    // });
-    this.physics.add.overlap(this.missileGroup, this.alienGroup, this.hitAlien, null, self)
+    console.log('add 1')
+    this.physics.add.collider(this.missileGroup, this.alienGroup, function(missileCollide, alienCollide) {
+      console.log('Hit')
+      // this.sound.play('explosion');
+      missileCollide.destroy()
+      alienCollide.destroy()
+      // this.createAlien()
+      this.score = this.score + 1
+      console.log(this.score)
+     });
+    //this.physics.add.overlap(this.missileGroup, this.alienGroup, this.hitAlien, null, self)
   }
 
   update (time, delta) {
@@ -124,8 +130,6 @@ class GameScene extends Phaser.Scene {
         aSingleAlien.body.velocity.x = alienXVelocity
       }
     })
-
-    this.scoreText.setText('Score: ' + this.score)
   }
 
   end () {
