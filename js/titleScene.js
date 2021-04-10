@@ -9,6 +9,10 @@
 class TitleScene extends Phaser.Scene {
   constructor () {
     super({ key: 'titleScene' })
+
+    this.titleSceneBackgroundImage = null
+    this.titleSceneText = null
+    this.titleSceneTextStyle = { font: '200px Times', fill: '#fde4b9', align: 'center' }
   }
 
   init (data) {
@@ -17,27 +21,21 @@ class TitleScene extends Phaser.Scene {
 
   preload () {
     console.log('Title Scene')
-    this.load.image('titleSceneBackground', 'assets/background.jpg')
+    this.load.image('titleSceneBackground', 'assets/aliens_screen_image.jpg')
   }
 
   create (data) {
-    if (this.sound.context.state === 'suspended') {
-      this.sound.context.resume()
-    }
-    const bg = this.add.sprite(0, 0, 'titleSceneBackground')
-    bg.setOrigin(0, 0)
+    this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground').setScale(2.75)
+    this.titleSceneBackgroundImage.x = 1920 / 2
+    this.titleSceneBackgroundImage.y = 1080 / 2
 
-    const text = this.add.text(100, 400, 'Welcome to my game!')
-    text.setInteractive({ useHandCursor: true })
-    text.on('pointerdown', () => this.clickButton())
+    this.titleSceneText = this.add.text(1920 / 2, (1080 / 2) + 350, 'Space Aliens', this.titleSceneTextStyle).setOrigin(0.5)
   }
 
   update (time, delta) {
-
-  }
-
-  clickButton () {
-    this.scene.switch('menuScene')
+    if (time > 6000) {
+      this.scene.switch('menuScene')
+    }
   }
 }
 

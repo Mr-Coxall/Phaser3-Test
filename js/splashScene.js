@@ -10,7 +10,7 @@ class SplashScene extends Phaser.Scene {
   constructor () {
     super({ key: 'splashScene' })
 
-    this.backgroundImage = null
+    this.splashSceneBackgroundImage = null
   }
 
   init (data) {
@@ -23,17 +23,13 @@ class SplashScene extends Phaser.Scene {
   }
 
   create (data) {
-    if (this.sound.context.state === 'suspended') {
-      this.sound.context.resume()
-    }
-    this.backgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
-    this.backgroundImage.x = 1920 / 2
-    this.backgroundImage.y = 1080 / 2
+    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    this.splashSceneBackgroundImage.x = 1920 / 2
+    this.splashSceneBackgroundImage.y = 1080 / 2
   }
 
   update (time, delta) {
-    console.log(time)
-    if (time > 2000) {
+    if (time > 3000) {
       this.scene.switch('titleScene')
     }
   }
